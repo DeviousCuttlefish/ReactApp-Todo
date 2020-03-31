@@ -6,6 +6,7 @@ import AddTodo from './components/AddTodo.js';
 import Contact from './components/pages/Contact';
 import uuid from 'uuid';
 import axios from 'axios';
+import FilterMenu from './components/layout/FilterMenu'
 
 import './App.css';
 
@@ -31,6 +32,12 @@ class App extends Component {
       })
     });
   };
+
+  filterActive = completed => {
+    this.setState({
+      todos: [...this.state.todos.filter(todo => todo.completed !== completed)]
+      })
+    };
 
   // Delete Todo
   delTodo = id => {
@@ -66,6 +73,7 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   <AddTodo addTodo={this.addTodo} />
+                  <FilterMenu />
                   <Todos
                     todos={this.state.todos}
                     markComplete={this.markComplete}

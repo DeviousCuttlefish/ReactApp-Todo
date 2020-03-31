@@ -29,7 +29,7 @@ export class AddTodo extends Component {
           type="submit" 
           value="Submit" 
           className="btn"
-          style={{flex: '1'}}
+          style={{flex: '1', backgroundColor: 'Green'}}
         />
       </form>
     )
