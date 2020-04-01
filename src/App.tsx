@@ -33,12 +33,6 @@ class App extends Component {
     });
   };
 
-  filterActive = completed => {
-    this.setState({
-      todos: [...this.state.todos.filter(todo => todo.completed !== completed)]
-      })
-    };
-
   // Delete Todo
   delTodo = id => {
     axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
