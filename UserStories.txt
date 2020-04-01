@@ -1,0 +1,7 @@
+User Stories
+
+1. As a single father, I want to keep my schedule organized, so that I can effectively plan my day.
+
+2. As a marketing professional, I want to have my meetings in order, so that I don’t have any times overlap with clients.
+
+3. As a media buyer, I want to see every tv and radio spot I have coming up, so I that I can efficiently plan out my campaigns.
