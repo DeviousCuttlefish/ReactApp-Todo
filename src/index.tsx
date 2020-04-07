@@ -3,18 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux'
-import rootReducer from './components/VisibilityFilter'
-
-const store = createStore(rootReducer)
 
 ReactDOM.render(
-  <Provider store={store}>
     <React.StrictMode>
       <App />
-    </React.StrictMode>
-  </Provider>,
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

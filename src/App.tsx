@@ -6,22 +6,38 @@ import AddTodo from './components/AddTodo.js';
 import Contact from './components/pages/Contact';
 import uuid from 'uuid';
 import axios from 'axios';
-import FilterMenu from './components/layout/FilterMenu'
 
 import './App.css';
+import Filter from './components/Filter';
 
 class App extends Component {
   state = {
     todos: []
   };
 
+  filAll = () => {
+    this.setState({
+      todos: this.state.todos
+    });
+  }
+
+  filActive = () => {
+    this.setState({
+      todos: this.state.todos.filter(todo => !todo.completed)
+    });
+  }
+
+  filComplete = () => {
+    this.setState({
+      todos: this.state.todos.filter(todo => todo.completed)
+    });
+  }
   componentDidMount() {
     axios
       .get('https://jsonplaceholder.typicode.com/todos?_limit=3')
       .then(res => this.setState({ todos: res.data }));
   }
 
-  // Toggle Complete
   markComplete = id => {
     this.setState({
       todos: this.state.todos.map(todo => {
@@ -33,7 +49,6 @@ class App extends Component {
     });
   };
 
-  // Delete Todo
   delTodo = id => {
     axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
       this.setState({
@@ -42,7 +57,6 @@ class App extends Component {
     );
   };
 
-  // Add Todo
   addTodo = title => {
     axios
       .post('https://jsonplaceholder.typicode.com/todos', {
@@ -67,7 +81,11 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   <AddTodo addTodo={this.addTodo} />
-                  <FilterMenu />
+                  <Filter 
+                  filAll={this.filAll}
+                  filActive={this.filActive}
+                  filComplete={this.filComplete}
+                  />
                   <Todos
                     todos={this.state.todos}
                     markComplete={this.markComplete}
