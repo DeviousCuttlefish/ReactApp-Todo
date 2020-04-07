@@ -12,47 +12,48 @@ import Filter from './components/Filter';
 
 class App extends Component {
   state = {
+    allTodos: [],
     todos: []
   };
 
   filAll = () => {
     this.setState({
-      todos: this.state.todos
+      todos: [...this.state.allTodos]
     });
   }
 
   filActive = () => {
     this.setState({
-      todos: this.state.todos.filter(todo => !todo.completed)
+      todos: this.state.allTodos.filter(todo => !todo.completed)
     });
   }
 
   filComplete = () => {
     this.setState({
-      todos: this.state.todos.filter(todo => todo.completed)
+      todos: this.state.allTodos.filter(todo => todo.completed)
     });
   }
   componentDidMount() {
     axios
       .get('https://jsonplaceholder.typicode.com/todos?_limit=3')
-      .then(res => this.setState({ todos: res.data }));
+      .then(res => this.setState({ allTodos: res.data, todos: res.data }));
   }
 
   markComplete = id => {
     this.setState({
-      todos: this.state.todos.map(todo => {
+      allTodos: [...this.state.allTodos.map(todo => {
         if (todo.id === id) {
           todo.completed = !todo.completed;
         }
         return todo;
-      })
+      })]
     });
   };
 
   delTodo = id => {
     axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
       this.setState({
-        todos: [...this.state.todos.filter(todo => todo.id !== id)]
+        todos: [...this.state.allTodos.filter(todo => todo.id !== id)]
       })
     );
   };
@@ -65,11 +66,13 @@ class App extends Component {
       })
       .then(res => {
         res.data.id = uuid.v4();
-        this.setState({ todos: [...this.state.todos, res.data] });
+        const todos =  [...this.state.allTodos, res.data];
+        this.setState({ todos, allTodos: todos  });
       });
   };
 
   render() {
+    const { todos } = this.state;
     return (
       <Router>
         <div className="App">
@@ -87,7 +90,7 @@ class App extends Component {
                   filComplete={this.filComplete}
                   />
                   <Todos
-                    todos={this.state.todos}
+                    todos={todos}
                     markComplete={this.markComplete}
                     delTodo={this.delTodo}
                   />
