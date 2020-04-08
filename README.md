@@ -1,6 +1,6 @@
 # ReactApp-Todo
 
-https://deviouscuttlefish.github.io/ReactApp-Todo/
+https://deviouscuttlefish.github.io/
 
 To do list App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
